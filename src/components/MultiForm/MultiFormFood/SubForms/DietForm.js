@@ -3,62 +3,69 @@ import "./SubForm.css";
 
 export default function DietForm(props) {
   const { modifyIndex } = props;
-  const [diet, setDiet] = useState("");
+  const [diet, setDiet] = useState("nodiet");
 
   const handleForm = (e) => {
     e.preventDefault();
     modifyIndex(3, { diet: diet });
   };
 
-  const handleRadio = (e) => {
-    setDiet(e.target.value);
-  };
+  const checkNoDiet = () => setDiet("nodiet");
+  const checkHomnivorous = () => setDiet("homnivorous");
+  const checkVegetarian = () => setDiet("vegetarian");
+  const checkVegan = () => setDiet("vegan");
+
+  console.log("diet = ", diet);
 
   return (
     <div>
       <form className="diet-form" onSubmit={handleForm}>
         <p>Quel est ton régime alimentaire ?</p>
 
-        <p>
+        <div className="radio-btn" onClick={checkNoDiet}>
           <input
             type="radio"
             id="nodiet"
             name="diet"
-            value="nodiet"
-            onChange={handleRadio}
+            value={diet}
+            checked={diet === "nodiet"}
+            onChange={checkNoDiet}
           ></input>
           <label htmlFor="nodiet">Pas de régime particulier</label>
-        </p>
-        <p>
+        </div>
+        <div className="radio-btn" onClick={checkHomnivorous}>
           <input
             type="radio"
             id="homnivorous"
             name="diet"
-            value="homnivorous"
-            onChange={handleRadio}
+            value={diet}
+            checked={diet === "homnivorous"}
+            onChange={checkHomnivorous}
           ></input>
           <label htmlFor="homnivorous">Homnivore</label>
-        </p>
-        <p>
+        </div>
+        <div className="radio-btn" onClick={checkVegetarian}>
           <input
             type="radio"
             id="vegetarian"
             name="diet"
-            value="vegetarian"
-            onChange={handleRadio}
+            value={diet}
+            checked={diet === "vegetarian"}
+            onChange={checkVegetarian}
           ></input>
           <label htmlFor="vegetarian">Végétarien</label>
-        </p>
-        <p>
+        </div>
+        <div className="radio-btn" onClick={checkVegan}>
           <input
             type="radio"
             id="vegan"
             name="diet"
-            value="vegan"
-            onChange={handleRadio}
+            value={diet}
+            checked={diet === "vegan"}
+            onChange={checkVegan}
           ></input>
-          <label htmlFor="vegetarian">Vegan</label>
-        </p>
+          <label htmlFor="vegan">Vegan</label>
+        </div>
         <button>Valider</button>
       </form>
       <button type="button">Précédent</button>
